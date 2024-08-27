@@ -2,3 +2,13 @@
   margin: 0 auto;
   text-align: center;
 }
+
+.btns-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+button:disabled {
+    border: none;
+    cursor: no-drop;
+}

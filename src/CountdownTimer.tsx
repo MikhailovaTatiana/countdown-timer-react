@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 function CountdownTimer() {
-    const [timeLeft, setTimeLeft] = useState<number>(10);
+    const [timeLeft, setTimeLeft] = useState<number>(60);
     const [isActive, setIsActive] = useState<boolean>(false);
     const timerRef = useRef<number>(0);
 
@@ -20,11 +20,13 @@ function CountdownTimer() {
         <div>
             <h1>Nedräkningstimer</h1>
             <h2>{timeLeft} sek kvar</h2>
-            <button onClick={() => setIsActive(true)}>Starta</button>
-            <button onClick={() => setIsActive(false)}>Pausa</button>
-            <button onClick={() => setTimeLeft(10)}>Återställ</button>
+            <section className="btns-container">
+                <button disabled={timeLeft === 0 || isActive} onClick={() => setIsActive(true)}>Starta</button>
+                <button disabled={timeLeft === 0 || !isActive} onClick={() => setIsActive(false)}>Pausa</button>
+                <button disabled={timeLeft === 60} onClick={() => setTimeLeft(60)}>Återställ</button>
+            </section>
         </div>
     );
-}
+} 
 
 export default CountdownTimer;
