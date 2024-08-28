@@ -16,6 +16,11 @@ function CountdownTimer() {
         return () => clearInterval(timerRef.current);
     }, [isActive, timeLeft]);
 
+    const handleReset = () => {
+        setIsActive(false);
+        setTimeLeft(60);
+    };
+
     return (
         <div>
             <h1>Nedräkningstimer</h1>
@@ -27,7 +32,7 @@ function CountdownTimer() {
             <section className="btns-container">
                 <button disabled={timeLeft === 0 || isActive} onClick={() => setIsActive(true)}>Starta</button>
                 <button disabled={timeLeft === 0 || !isActive} onClick={() => setIsActive(false)}>Pausa</button>
-                <button disabled={timeLeft === 60} onClick={() => setTimeLeft(60)}>Återställ</button>
+                <button disabled={timeLeft === 60} onClick={handleReset}>Återställ</button>
             </section>
         </div>
     );
