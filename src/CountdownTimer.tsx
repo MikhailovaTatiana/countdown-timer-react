@@ -29,9 +29,12 @@ function CountdownTimer() {
     }
 
     const handleCustomTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCustomTime(e.target.value);
-        setTimeLeft(parseInt(customTime));
-        setIsActive(false);
+        const time = parseInt(e.target.value);
+        if (!isNaN(time) && time > 0) {
+            setCustomTime(e.target.value);
+            setTimeLeft(time);
+            setIsActive(false);
+        }
     };
 
     return (
