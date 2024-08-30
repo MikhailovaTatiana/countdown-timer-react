@@ -9,16 +9,13 @@ function CountdownTimer() {
     useEffect(() => {
         if (isActive && timeLeft > 0) {
             timerRef.current = setInterval(() => {
-                setTimeLeft((sec) => sec - 1);
+                setTimeLeft(sec => sec - 1);
             }, 1000);
-        } else if (timeLeft === 0) {
-            if (timerRef.current !== null) {
-                clearInterval(timerRef.current);
-            }
         }
         return () => {
-            if (timerRef.current !== null) {
+            if (timerRef.current) {
                 clearInterval(timerRef.current);
+                timerRef.current = null;
             }
         };
     }, [isActive, timeLeft]);
