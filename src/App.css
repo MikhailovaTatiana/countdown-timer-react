@@ -12,3 +12,7 @@ button:disabled {
     border: none;
     cursor: no-drop;
 }
+
+.input-container {
+    margin-top: 2rem;
+}

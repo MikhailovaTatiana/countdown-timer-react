@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 function CountdownTimer() {
     const [timeLeft, setTimeLeft] = useState<number>(60);
     const [isActive, setIsActive] = useState<boolean>(false);
+    const [customTime, setCustomTime] = useState<string>('60');
     const timerRef = useRef<number | null>(null);
 
     useEffect(() => {
@@ -24,7 +25,13 @@ function CountdownTimer() {
 
     const handleReset = () => {
         setIsActive(false);
-        setTimeLeft(60);
+        setTimeLeft(parseInt(customTime));
+    }
+
+    const handleCustomTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCustomTime(e.target.value);
+        setTimeLeft(parseInt(customTime));
+        setIsActive(false);
     };
 
     return (
@@ -49,12 +56,23 @@ function CountdownTimer() {
                     Pausa
                 </button>
                 <button
-                    disabled={timeLeft === 60}
+                    disabled={timeLeft === 60 || timeLeft === parseInt(customTime)}
                     onClick={handleReset}
                 >
                     Återställ
                 </button>
             </section>
+            <div className="input-container">
+                <span>Starttid: </span>
+                <input
+                    type="number"
+                    id="customTime"
+                    value={customTime}
+                    onChange={handleCustomTimeChange}
+                    disabled={isActive}
+                />
+                <span> sek</span>
+            </div>
         </div>
     );
 }
